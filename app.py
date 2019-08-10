@@ -20,9 +20,6 @@ stores = [
 def home():
     return "Hello, world!"
 
-
-app.run(port=5000)
-
 # POST /store
 # only accessible via POST, but could have more
 @app.route('/store', methods=['POST'])
@@ -37,7 +34,7 @@ def get_store(name):
 # GET /store
 @app.route('/store', methods=["GET"])
 def get_stores():
-    pass
+    return jsonify({"stores": stores})
 
 # POST /store/:name/item
 @app.route('/store/<string:name>/item', methods=["POST"])
@@ -48,3 +45,5 @@ def create_item_in_store(name):
 @app.route('/store/<string:name>/item', methods=["GET"])
 def get_items_in_sote(name):
     pass
+
+app.run(port=5000)
