@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 stores = [
@@ -18,7 +18,7 @@ stores = [
 # function name doesn't actually matter
 @app.route('/')
 def home():
-    return "Hello, world!"
+    return render_template('index.html')
 
 # POST /store
 # only accessible via POST, but could have more
@@ -41,7 +41,7 @@ def get_store(name):
     return jsonify({"message": "Store not found"})
 
 # GET /store
-@app.route('/store', methods=["GET"])
+@app.route('/store')
 def get_stores():
     return jsonify({"stores": stores})
 
@@ -69,4 +69,4 @@ def get_items_in_store(name):
     return jsonify({"message": "Store not found"})
 
 
-app.run(port=5000)
+app.run(port=5000, debug=True)
